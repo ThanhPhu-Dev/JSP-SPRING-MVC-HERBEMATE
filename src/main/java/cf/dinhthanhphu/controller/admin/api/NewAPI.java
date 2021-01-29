@@ -3,6 +3,7 @@ package cf.dinhthanhphu.controller.admin.api;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,23 +16,24 @@ import cf.dinhthanhphu.model.NewsModel;
 import cf.dinhthanhphu.service.INewService;
 import cf.dinhthanhphu.utils.HttpUtil;
 
-@WebServlet(urlPatterns = { "/api-admin-new" })
+@WebServlet(urlPatterns = { "/admin-new-list" })
 public class NewAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private INewService newService;
-	
-	//doget dùng để select
+
+	// doget dùng để select
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/new/list.jsp");
+		rd.forward(req, resp);
 	}
-	
-	//doPost dùng để insert
-	@Override 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	// doPost dùng để insert
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
 		ObjectMapper mapper = new ObjectMapper();
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
@@ -39,9 +41,9 @@ public class NewAPI extends HttpServlet {
 		newModel = newService.save(newModel);
 		mapper.writeValue(resp.getOutputStream(), newModel);
 	}
-	
-	//doPut dùng để update
-	@Override 
+
+	// doPut dùng để update
+	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		req.setCharacterEncoding("UTF-8");
@@ -51,7 +53,7 @@ public class NewAPI extends HttpServlet {
 		mapper.writeValue(resp.getOutputStream(), updateNews);
 	}
 
-	//doDelete dùng để delete
+	// doDelete dùng để delete
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
