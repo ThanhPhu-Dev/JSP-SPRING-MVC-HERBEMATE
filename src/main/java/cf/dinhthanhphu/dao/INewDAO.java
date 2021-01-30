@@ -10,6 +10,6 @@ public interface INewDAO extends GenericDAO<NewsModel> {
 	Long save(NewsModel newModel);
 	void update(NewsModel updateNews);
 	void delete(long id);
-	
+	List<NewsModel> findAll();
 }
  

@@ -1,6 +1,6 @@
 package cf.dinhthanhphu.model;
 
-public class UserModel extends AbstractModel{
+public class UserModel extends AbstractModel<UserModel>{
 	private String userName;
 	private String fullName;
 	private String password;

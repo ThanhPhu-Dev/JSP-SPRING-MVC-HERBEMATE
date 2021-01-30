@@ -1,6 +1,6 @@
 package cf.dinhthanhphu.model;
 
-public class commentModel extends AbstractModel{
+public class commentModel extends AbstractModel<commentModel>{
 	private String content;
 	private long userID;
 	private long newID;

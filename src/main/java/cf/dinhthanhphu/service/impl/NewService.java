@@ -48,4 +48,9 @@ public class NewService implements INewService {
 		
 	}
 
+	@Override
+	public List<NewsModel> findAll() {
+		return newsDAO.findAll();
+	}
+
 }

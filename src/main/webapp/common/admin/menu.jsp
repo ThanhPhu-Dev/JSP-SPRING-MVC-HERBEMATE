@@ -41,7 +41,7 @@
 		</a> <b class="arrow"></b>
 			<ul class="submenu">
 				<li><a
-					href='<c:url value="/admin-new-list"/>'>
+					href='<c:url value="/admin-new"/>'>
 						<i class="menu-icon fa fa-caret-right"></i> 
 						DS bài viết
 				</a> <b class="arrow"></b></li>

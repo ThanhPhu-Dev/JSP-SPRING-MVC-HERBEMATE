@@ -16,7 +16,7 @@ import cf.dinhthanhphu.model.NewsModel;
 import cf.dinhthanhphu.service.INewService;
 import cf.dinhthanhphu.utils.HttpUtil;
 
-@WebServlet(urlPatterns = { "/admin-new-list" })
+@WebServlet(urlPatterns = { "/api-admin-new" })
 public class NewAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

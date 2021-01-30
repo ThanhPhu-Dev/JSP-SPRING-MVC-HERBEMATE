@@ -1,14 +1,17 @@
 package cf.dinhthanhphu.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AbstractModel {
+public class AbstractModel<T> {
 	private long id;
 	private Date createDate;
 	private Date modifiedDate;
 	private String createBy;
 	private String modifiedBy;
 	private long[] ids;
+	private List<T> listResult = new ArrayList<>();
 	
 	public long getId() {
 		return id;
@@ -45,5 +48,11 @@ public class AbstractModel {
 	}
 	public void setIds(long[] ids) {
 		this.ids = ids;
+	}
+	public List<T> getListResult() {
+		return listResult;
+	}
+	public void setListResult(List<T> listResult) {
+		this.listResult = listResult;
 	}
 }
