@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import cf.dinhthanhphu.dao.INewDAO;
 import cf.dinhthanhphu.model.NewsModel;
+import cf.dinhthanhphu.paging.pageble;
 import cf.dinhthanhphu.service.INewService;
 
 @ManagedBean
@@ -49,8 +50,13 @@ public class NewService implements INewService {
 	}
 
 	@Override
-	public List<NewsModel> findAll() {
-		return newsDAO.findAll();
+	public List<NewsModel> findAll(pageble pageble) {
+		return newsDAO.findAll(pageble);
+	}
+
+	@Override
+	public int getTotalItem() {
+		return newsDAO.getTotalItem();
 	}
 
 }

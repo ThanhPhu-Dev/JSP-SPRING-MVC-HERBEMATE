@@ -8,19 +8,25 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<!-- sitmesh(decorator) có chức năng điều hướng (filter) đến đúng trang người dùng muốn bằng tiền tố url -->
-		<sitemesh.version>2.4.2</sitemesh.version> 
+		<!-- sitmesh(decorator) có chức năng điều hướng (là 1 thư viện filter kiểmtra tất cả url để chuyển trang) đến đúng trang 
+			người dùng muốn bằng tiền tố url -->
+		<sitemesh.version>2.4.2</sitemesh.version>
 		<jdbc.mssql.version>6.1.0.jre8</jdbc.mssql.version>
-		<!-- Dependency injection: khi nhiều class inplement cùng 1 interface thì khi dùng nhiều function của nhiều class đó thông
-		thường ta cần tạo hàm khởi tạo rồi trong đó khởi tạo từng đối tượng, và inject sẽ làm dùm việc khởi tạo, chỉ cần khái báo biến Iter-Biến
-		thì gọi hàm của bất kỳ class nào cũng được vì việc khỏi tạo đối tượng đó đã dc inject lo-->
+		<!-- Dependency injection: khi nhiều class inplement cùng 1 interface thì 
+			khi dùng nhiều function của nhiều class đó thông thường ta cần tạo hàm khởi 
+			tạo rồi trong đó khởi tạo từng đối tượng, và inject sẽ làm dùm việc khởi 
+			tạo, chỉ cần khái báo biến Iter-Biến thì gọi hàm của bất kỳ class nào cũng 
+			được vì việc khỏi tạo đối tượng đó đã dc inject lo -->
 		<weld.servlet.version>1.1.10.Final</weld.servlet.version>
 		<jsp.api.version>2.0</jsp.api.version>
 		<servlet.api.version>3.1.0</servlet.api.version>
 		<!-- là jstl dùng taglist để từ view trỏ đến controller -->
 		<JSTL.version>1.2</JSTL.version>
+		<!-- là thư viện xữ lý parammerter trên url -->
+		<beanUtils.version>1.9.4</beanUtils.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		
 	</properties>
 
 	<dependencies>
@@ -57,7 +63,7 @@
 			<artifactId>weld-servlet</artifactId>
 			<version>${weld.servlet.version}</version>
 		</dependency>
-		
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -86,20 +92,26 @@
 			<version>1.9.13</version>
 		</dependency>
 		<!--end json -->
-		
+
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
 		</dependency>
-		
+
 		<dependency>
-   			<groupId>javax.annotation</groupId>
-    		<artifactId>javax.annotation-api</artifactId>
-    		<version>1.2</version>
- 		 </dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${beanUtils.version}</version>
+		</dependency>
 	</dependencies>
-	
+
 
 	<build>
 		<plugins>

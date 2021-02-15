@@ -11,17 +11,13 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Trang
-						chủ <span class="sr-only">(current)</span>
+				<li class="nav-item active"><a class="nav-link" href="#">Trang chủ 
+				<span class="sr-only">(current)</span>
 				</a></li>
 
 				<li class="nav-item"><a class="nav-link" href='#'>Wellcome</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="#"/>Thoát</a></li>
-
-
-				<li class="nav-item"><a class="nav-link"
-					href='#'>Đăng nhập</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Thoát</a></li>
+				<li class="nav-item"><a class="nav-link" href='<c:url value="/dang-nhap?action=login"/>'>Đăng nhập</a></li>
 			</ul>
 		</div>
 	</div>

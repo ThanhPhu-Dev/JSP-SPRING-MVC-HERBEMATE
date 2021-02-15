@@ -5,6 +5,7 @@
 	version="2.5">
 	<display-name>BanKhoaHoc</display-name>
 
+	<!-- áp dụng sitemesh quét kiểm tra tất cả các url request -->
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>

@@ -1,3 +1,4 @@
+
 <%@include file="/common/taglib.jsp"%>
 <%-- <c:url var="APIurl" value="/api-admin-new"/>
 <c:url var ="NewURL" value="/admin-new"/> --%>
@@ -58,25 +59,36 @@
 										<table class="table">
 											<thead>
 												<tr>
+													<th scope="col">Mã Bài Viết</th>
 													<th scope="col">Tên Bài Viết</th>
+													<th scope="col">hình Ảnh</th>
 													<th scope="col">Mô Tả Ngắn</th>
+													<th scope="col">Nội Dung</th>
+													<th scope="col">Mã Danh Mục</th>
 												</tr>
 											</thead>
 											<tbody>
+											<c:forEach var = "item" items= "${model.listResult}">
 												<tr>
-													<th scope="row">1</th>
-													<td>Mark</td>
+													<th scope="row">${item.id}</th>
+													<th>${item.title}</th>
+													<td>${item.thumbnail}</td>
+													<td>${item.shortDescription}</td>
+													<td>${item.content}</td>
+													<td>${item.categoryId}</td>
 												</tr>
+											
+											</c:forEach>
 											</tbody>
 										</table>
 										<%-- <c:url var="editURL" value="/admin-new" /> --%>
-										<!-- <ul class="pagination" id="pagination"></ul> -->
+										<ul class="pagination" id="pagination"></ul>
 
-										<!-- <input type="hidden" value="" id="page" name="page" /> <input
-											type="hidden" value="" id="maxPageItem" name="maxPageItem" />
+										<input type="hidden" value="" id="page" name="page" />
+										<input type="hidden" value="" id="maxPageItem" name="maxPageItem" />
 										<input type="hidden" value="" id="sortName" name="sortName" />
-										<input type="hidden" value="" id="sortBy" name="sortBy" /> <input
-											type="hidden" value="" id="type" name="type" /> -->
+										<input type="hidden" value="" id="sortBy" name="sortBy" /> 
+										<input type="hidden" value="" id="type" name="type" />
 									</div>
 								</div>
 							</div>
@@ -88,18 +100,27 @@
 	</div>
 	<!-- /.main-content -->
 	<script>
-	 /* $(function () {
+	var totalPages = ${model.totalPage};
+	var currentPage = ${model.page};
+	/* var visiblePages = ${model.maxPageItem}; */
+	var limit = 5;
+	 $(function () {
 	        window.pagObj = $('#pagination').twbsPagination({
-	            totalPages: 10,
-	            visiblePages: 5,
-	            startPage: 2,
+	            totalPages: totalPages,
+	            visiblePages: 4,
+	            startPage: currentPage,
 	            onPageClick: function (event, page) {
-	                console.info(page + ' (from options)');
+	            	if (currentPage != page){
+		                // console.info(page + ' (from options)');
+		                $('#maxPageItem').val(limit);
+		                $('#page').val(page);
+		                $('#sortName').val('title');
+		                $('#sortBy').val('desc');
+		                $('#formSubmit').submit();
+	            	}
 	            }
-	        }).on('page', function (event, page) {
-	            console.info(page + ' (from event listening)');
 	        });
-	    }); */
+	    });
 		/* var totalPages = $
 		{
 			model.totalPage

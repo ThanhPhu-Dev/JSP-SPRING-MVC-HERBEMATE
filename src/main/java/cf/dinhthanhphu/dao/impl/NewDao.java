@@ -7,6 +7,7 @@ import javax.annotation.ManagedBean;
 import cf.dinhthanhphu.dao.INewDAO;
 import cf.dinhthanhphu.mapper.NewMapper;
 import cf.dinhthanhphu.model.NewsModel;
+import cf.dinhthanhphu.paging.pageble;
 
 @ManagedBean
 public class NewDao extends AbstractDAO<NewsModel> implements INewDAO{
@@ -50,9 +51,28 @@ public class NewDao extends AbstractDAO<NewsModel> implements INewDAO{
 	}
 
 	@Override
-	public List<NewsModel> findAll() {
-		String sql = "SELECT * FROM news";
-		return query(sql, new NewMapper());
+	public List<NewsModel> findAll(pageble pageble) {
+//		String sql = "SELECT *  FROM news  ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+		StringBuilder sql = new StringBuilder("SELECT * FROM news");
+		if(pageble.getSorter() != null)
+		{
+			sql.append(" ORDER BY " +pageble.getSorter().getSortName()+ " "+ pageble.getSorter().getSortBy());
+		}
+		else {
+			sql.append("ORDER BY id");
+		}
+		if(pageble.getOffset() != null && pageble.getLimit() != null)//nếu để null vào câu query thì chổ set parameter sẽ bị lổi vì k có kiệu null
+		{
+			
+			sql.append(" OFFSET "+pageble.getOffset()+" ROWS FETCH NEXT "+pageble.getLimit()+" ROWS ONLY");
+		}
+		return query(sql.toString(), new NewMapper());
+	}
+
+	@Override
+	public int getTotalItem() {
+		String sql ="SELECT COUNT(*) FROM news";
+		return count(sql);
 	}
 
 	
