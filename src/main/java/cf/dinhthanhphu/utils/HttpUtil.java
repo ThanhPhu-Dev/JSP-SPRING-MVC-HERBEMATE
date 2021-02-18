@@ -13,6 +13,7 @@ public class HttpUtil {
 		value =v;
 	}
 	
+	// dùng framework ObjectMapper để mapping thuộc tính trong string json sang object
 	public <T> T toModel(Class<T> tClass) {
 		try {
 			return new ObjectMapper().readValue(value, tClass);
@@ -23,6 +24,7 @@ public class HttpUtil {
 		return null;
 	}
 	
+	// là hàm chuyển json thành string json
 	public static HttpUtil of(BufferedReader reader) {
 		StringBuilder sb = new StringBuilder();
 		try {

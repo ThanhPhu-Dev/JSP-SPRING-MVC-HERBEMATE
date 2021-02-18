@@ -11,6 +11,7 @@ import org.apache.commons.beanutils.BeanUtils;
 public class FormUtil {
 
 
+		//dùng beanutil để để mapping các thuộc tính trong form- parameter sang object
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public static <T> T toModel(Class<T> tClass, HttpServletRequest req) {
 		T ob= null;

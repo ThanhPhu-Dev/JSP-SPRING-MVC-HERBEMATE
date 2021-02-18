@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cf.dinhthanhphu.model.NewsModel;
+import cf.dinhthanhphu.model.UserModel;
 import cf.dinhthanhphu.service.ICategoryService;
 import cf.dinhthanhphu.service.INewService;
+import cf.dinhthanhphu.service.IUserService;
+import cf.dinhthanhphu.utils.FormUtil;
 
 
 @WebServlet(urlPatterns = { "/trang-chu","/dang-nhap" })
@@ -23,7 +26,7 @@ public class HomeController extends HttpServlet {
 	private ICategoryService categoryService;
 	
 	@Inject
-	private INewService newService;
+	private IUserService userService;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +39,7 @@ public class HomeController extends HttpServlet {
 //		newService.save(newModel);
 		
 		String action = req.getParameter("action");
-		if(action != null && action.equals("login")) {
+		if(action != null && action.equals("login")) {	
 			RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
 			rd.forward(req, resp);
 		}
@@ -52,8 +55,20 @@ public class HomeController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("/views/user/Home.jsp");
-		rd.forward(req, resp);
+		String action = req.getParameter("action");
+		if(action != null && action.equals("login")) {
+			UserModel model = FormUtil.toModel(UserModel.class, req);
+			model = userService.findUserNameAndPasswordAndStatus(model.getUserName(), model.getPassword(), 1);
+			if(model != null) {
+				if(model.getRole().getCode().equals("USER")) {
+					resp.sendRedirect( req.getContextPath() + "/trang-chu");
+				}else if(model.getRole().getCode().equals("ADMIN")) {
+					resp.sendRedirect( req.getContextPath() + "/admin-home");
+				}
+			}else {
+				resp.sendRedirect( req.getContextPath() + "/dang-nhap?action=login");
+			}
+		}
 	}
 
 }

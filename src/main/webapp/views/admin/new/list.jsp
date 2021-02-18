@@ -14,8 +14,7 @@
 
 <body>
 	<div class="main-content">
-		<form action="<c:url value='/admin-new'/>" id="formSubmit"
-			method="get">
+		<form action="<c:url value='/admin-new'/>" id="formSubmit" method="get">
 			<div class="main-content-inner">
 				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 					<ul class="breadcrumb">

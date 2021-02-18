@@ -19,9 +19,10 @@
 			</div>
 
 			<!-- Login Form -->
-			<form>
-					<input type="text" id="login" class="fadeIn second" name="login" placeholder="login"> 
-					<input type="password" id="password" class="fadeIn third" name="login" placeholder="password"> 
+			<form action="<c:url value='/dang-nhap'/>" id="formLogin" method="POST">
+					<input type="text" id="login" class="fadeIn second" name="userName" placeholder="login"> 
+					<input type="password" id="password" class="fadeIn third" name="password" placeholder="password"> 
+					<input type="hidden" value="login" id="action" name="action" />
 					<input type="submit" class="fadeIn fourth" value="Log In">
 			</form>
 
