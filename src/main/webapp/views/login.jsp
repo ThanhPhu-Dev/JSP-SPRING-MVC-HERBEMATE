@@ -14,12 +14,13 @@
 			<!-- Tabs Titles -->
 
 			<!-- Icon -->
-			<div class="fadeIn first">
-				<div class="alert alert-${alter}">
-			    	<strong>${message}</strong> 
-			 	</div>
-			 </div>
-			
+			<c:if test="${not empty message}">
+				<div class="fadeIn first">
+					<div class="alert alert-${alter}">
+				    	<strong>${message}</strong> 
+				 	</div>
+				 </div>
+			</c:if>
 			
 			<!-- Login Form -->
 			<form action="<c:url value='/dang-nhap'/>" id="formLogin" method="POST">
