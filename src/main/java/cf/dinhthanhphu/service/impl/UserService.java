@@ -1,6 +1,8 @@
 package cf.dinhthanhphu.service.impl;
 
-import com.sun.jersey.spi.inject.Inject;
+
+
+import javax.inject.Inject;
 
 import cf.dinhthanhphu.dao.IUserDAO;
 import cf.dinhthanhphu.model.UserModel;

@@ -20,10 +20,16 @@ public class UserMapper implements RowMappper<UserModel>{
 			users.setPassword(rs.getString("password"));
 			users.setStatus(rs.getInt("status"));
 			
-			RoleModel role = new RoleModel();
-			role.setCode(rs.getString("code"));
-			role.setName(rs.getString(rs.getString("name")));
-			users.setRole(role);
+			try {
+			    RoleModel role = new RoleModel();
+	            role.setCode(rs.getString("code"));
+	            role.setName(rs.getString("name"));
+	            users.setRole(role);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+			
+			
 			
 			users.setCreateDate(rs.getDate("createddate"));
 			users.setCreateBy(rs.getString("createdby"));
