@@ -210,6 +210,9 @@ input[type=text]:placeholder, input[type=password]:placeholden {
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
   height: 70px;
+  margin-top: 10px;
+  display: inline-block;
+  width: 85%;
 }
 
 .fadeIn.second {

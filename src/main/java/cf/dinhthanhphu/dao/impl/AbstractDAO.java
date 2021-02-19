@@ -9,18 +9,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import cf.dinhthanhphu.dao.GenericDAO;
 import cf.dinhthanhphu.mapper.RowMappper;
 
 public class AbstractDAO<T> implements GenericDAO<T> {
+    
+    ResourceBundle mybundle = ResourceBundle.getBundle("db");
 
 	public Connection getConnection() {
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String url = "jdbc:sqlserver://localhost:1433;database=jspservletjdbc;integratedSecurity=true;";
-			String user = "sa";
-			String pass = "1254";
+		    Class.forName(mybundle.getString("driverName"));
+            String url = mybundle.getString("url");
+            String user =  mybundle.getString("user");
+            String pass = mybundle.getString("pass");
 			return DriverManager.getConnection(url, user, pass);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

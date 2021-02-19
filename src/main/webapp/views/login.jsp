@@ -15,9 +15,12 @@
 
 			<!-- Icon -->
 			<div class="fadeIn first">
-				
-			</div>
-
+				<div class="alert alert-${alter}">
+			    	<strong>${message}</strong> 
+			 	</div>
+			 </div>
+			
+			
 			<!-- Login Form -->
 			<form action="<c:url value='/dang-nhap'/>" id="formLogin" method="POST">
 					<input type="text" id="login" class="fadeIn second" name="userName" placeholder="login"> 

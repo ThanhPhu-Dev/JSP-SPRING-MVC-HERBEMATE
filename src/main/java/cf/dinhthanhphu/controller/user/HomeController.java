@@ -1,6 +1,7 @@
 package cf.dinhthanhphu.controller.user;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,7 @@ import cf.dinhthanhphu.utils.SessionUtil;
 @WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap","/thoat" })
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ResourceBundle resourcebundle = ResourceBundle.getBundle("message");
 
 	@Inject
 	private ICategoryService categoryService;
@@ -37,8 +39,15 @@ public class HomeController extends HttpServlet {
 //		newModel.setContent("Bai Viet 1");
 //		newService.save(newModel);
 
+	    
 		String action = req.getParameter("action");
 		if (action != null && action.equals("login")) {
+		    String message = req.getParameter("message");
+		    String alter = req.getParameter("alter");
+		    if(message != null && alter != null) {
+		        req.setAttribute("message", resourcebundle.getString(message));
+		        req.setAttribute("alter", alter);
+		    }
 			RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
 			rd.forward(req, resp);
 		} else if (action != null && action.equals("logout")) {
@@ -67,7 +76,7 @@ public class HomeController extends HttpServlet {
 					resp.sendRedirect(req.getContextPath() + "/admin-home");
 				}
 			} else {
-				resp.sendRedirect(req.getContextPath() + "/dang-nhap?action=login");
+				resp.sendRedirect(req.getContextPath() + "/dang-nhap?action=login&message=username_password_invalid&alter=danger");
 			}
 		}
 	}
