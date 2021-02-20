@@ -25,7 +25,6 @@ public class NewService implements INewService {
 	@Override
 	public NewsModel save(NewsModel newModel) {
 		newModel.setCreateDate(new Date(System.currentTimeMillis()));
-		newModel.setCreateBy("");
 		Long newId = newsDAO.save(newModel);
 		return newsDAO.finOne(newId);
 	}
@@ -35,7 +34,6 @@ public class NewService implements INewService {
 		NewsModel oldNew = newsDAO.finOne(updateNews.getId());
 		updateNews.setCreateBy(oldNew.getCreateBy());
 		updateNews.setCreateDate(oldNew.getCreateDate());
-		updateNews.setModifiedBy("");
 		updateNews.setModifiedDate(new Date(System.currentTimeMillis()));
 		newsDAO.update(updateNews);
 		return newsDAO.finOne(updateNews.getId());
@@ -58,5 +56,10 @@ public class NewService implements INewService {
 	public int getTotalItem() {
 		return newsDAO.getTotalItem();
 	}
+
+    @Override
+    public NewsModel findOne(Long id) {
+      return newsDAO.finOne(id);
+    }
 
 }

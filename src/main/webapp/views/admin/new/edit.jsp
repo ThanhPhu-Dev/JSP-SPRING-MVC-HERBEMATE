@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="APIurl" value="/api-admin-new"/>
-<c:url var ="NewURL" value="/admin-new"/>
+<%-- <c:url var="APIurl" value="/api-admin-new"/>
+<c:url var ="NewURL" value="/admin-new"/> --%>
 <html>
 <head>
     <title>Chỉnh sửa bài viết</title>
@@ -34,25 +34,13 @@
                                 <label class="col-sm-3 control-label no-padding-right">Thể loại</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="categoryCode" name="categoryCode">
-                                        <c:if test="${empty model.categoryCode}">
-                                            <option value="">Chọn loại bài viết</option>
-                                            <c:forEach var="item" items="${categories}">
-                                                <option value="${item.code}">${item.name}</option>
-                                            </c:forEach>
-                                        </c:if>
-                                        <c:if test="${not empty model.categoryCode}">
-                                            <option value="">Chọn loại bài viết</option>
-                                            <c:forEach var="item" items="${categories}">
-                                                <option value="${item.code}" <c:if test="${item.code == model.categoryCode}">selected="selected"</c:if>>
-                                                        ${item.name}
-                                                </option>
-                                            </c:forEach>
-                                        </c:if>
+                                         <option value="">Chọn loại bài viết</option>
                                     </select>
                                 </div>
                             </div>
                             <br/>
                             <br/>
+                            
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right">Tiêu đề</label>
                                 <div class="col-sm-9">
@@ -102,7 +90,7 @@
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
 	var editor = '';
 	$(document).ready(function(){
 		editor = CKEDITOR.replace( 'content');
@@ -153,6 +141,6 @@
             }
         });
     }
-</script>
+</script> -->
 </body>
 </html>

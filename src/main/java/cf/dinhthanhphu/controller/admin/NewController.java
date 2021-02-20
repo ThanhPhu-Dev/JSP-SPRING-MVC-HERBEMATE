@@ -27,18 +27,29 @@ public class NewController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		NewsModel news = FormUtil.toModel(NewsModel.class, req);
-		pageble pageble = new PageRequest(news.getPage(), news.getMaxPageItem(), 
-																		new Sorter(news.getSortName(), news.getSortBy()));
-		news.setListResult(newsServive.findAll(pageble));
+	    String view="";
+		NewsModel model = FormUtil.toModel(NewsModel.class, req);
+		if(model.getType().equals(SystemConstant.LIST)) {
+		pageble pageble = new PageRequest(model.getPage(), model.getMaxPageItem(), 
+										  new Sorter(model.getSortName(), model.getSortBy()));
+		model.setListResult(newsServive.findAll(pageble)); 
 		//đếm số sượng item trong db.
-		news.setTotalItem(newsServive.getTotalItem());
+		model.setTotalItem(newsServive.getTotalItem());
 		//tính tổng số trang.
-		news.setTotalPage((int) Math.ceil((double) news.getTotalItem() /  news.getMaxPageItem()));
-		req.setAttribute(SystemConstant.MODEL, news);
-		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/new/list.jsp");
-		rd.forward(req, resp);
-
+		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() /  model.getMaxPageItem()));
+		
+		view = "/views/admin/new/list.jsp";
+		}else if(model.getType().equals(SystemConstant.EDIT)) {
+		    if(model.getId() != null) {
+		        model = newsServive.findOne(model.getId());
+		    }else {
+		        
+		    }
+		        
+		    view = "/views/admin/new/edit.jsp";
+		}
+		req.setAttribute(SystemConstant.MODEL, model);
+		RequestDispatcher rd = req.getRequestDispatcher(view);
+        rd.forward(req, resp);
 	}
 }

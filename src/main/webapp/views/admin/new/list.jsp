@@ -35,12 +35,12 @@
 								<div class="table-btn-controls">
 									<div class="pull-right tableTools-container">
 										<div class="dt-buttons btn-overlap btn-group">
-											<a flag="info"
-												class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
-												data-toggle="tooltip" title='Thêm bài viết'
-												href='<c:url value="/admin-new?type=edit"/>'> <span>
-													<i class="fa fa-plus-circle bigger-110 purple"></i>
-											</span>
+											<a flag="info" 
+												class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" 
+												title='Thêm bài viết' href='<c:url value="/admin-new?type=edit"/>'> 
+													<span>
+														<i class="fa fa-plus-circle bigger-110 purple"></i>
+													</span>
 											</a>
 											<button id="btnDelete" type="button"
 												class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
@@ -69,18 +69,25 @@
 											<tbody>
 											<c:forEach var = "item" items= "${model.listResult}">
 												<tr>
-													<th scope="row">${item.id}</th>
-													<th>${item.title}</th>
+													<td>${item.title}</td>
 													<td>${item.thumbnail}</td>
 													<td>${item.shortDescription}</td>
 													<td>${item.content}</td>
 													<td>${item.categoryId}</td>
+													<td>
+														<c:url var="editURL" value="./admin-new">
+															<c:param name="type" value="edit"></c:param>
+															<c:param name="id" value="${item.id}"></c:param>
+														</c:url>
+														<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+															title="Cập nhật bài viết" href='<c:url value="${editURL}"></c:url>'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+														</a>
+													</td>
 												</tr>
 											
 											</c:forEach>
 											</tbody>
 										</table>
-										<%-- <c:url var="editURL" value="/admin-new" /> --%>
 										<ul class="pagination" id="pagination"></ul>
 
 										<input type="hidden" value="" id="page" name="page" />
@@ -115,37 +122,13 @@
 		                $('#page').val(page);
 		                $('#sortName').val('title');
 		                $('#sortBy').val('desc');
+		                $('#type').val('list');
 		                $('#formSubmit').submit();
 	            	}
 	            }
 	        });
 	    });
-		/* var totalPages = $
-		{
-			model.totalPage
-		};
-		var currentPage = $
-		{
-			model.page
-		};
-		var limit = 2;
-		$(function() {
-			window.pagObj = $('#pagination').twbsPagination({
-				totalPages : totalPages,
-				visiblePages : 10,
-				startPage : currentPage,
-				onPageClick : function(event, page) {
-					if (currentPage != page) {
-						$('#maxPageItem').val(limit);
-						$('#page').val(page);
-						$('#sortName').val('title');
-						$('#sortBy').val('desc');
-						$('#type').val('list');
-						$('#formSubmit').submit();
-					}
-				}
-			});
-		}); */
+		
 
 		/* $("#btnDelete").click(function() {
 			var data = {};
