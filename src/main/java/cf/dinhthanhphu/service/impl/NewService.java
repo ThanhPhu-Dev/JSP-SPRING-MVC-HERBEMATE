@@ -6,7 +6,9 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
 
+import cf.dinhthanhphu.dao.ICategoryDAO;
 import cf.dinhthanhphu.dao.INewDAO;
+import cf.dinhthanhphu.model.CategoryModel;
 import cf.dinhthanhphu.model.NewsModel;
 import cf.dinhthanhphu.paging.pageble;
 import cf.dinhthanhphu.service.INewService;
@@ -16,6 +18,9 @@ public class NewService implements INewService {
 
 	@Inject
 	private INewDAO newsDAO;
+	
+	@Inject
+	private ICategoryDAO categoryDAO;
 
 	@Override
 	public List<NewsModel> findByCategoryId(Long categoryId) {
@@ -25,6 +30,8 @@ public class NewService implements INewService {
 	@Override
 	public NewsModel save(NewsModel newModel) {
 		newModel.setCreateDate(new Date(System.currentTimeMillis()));
+		CategoryModel category = categoryDAO.findOneByCode(newModel.getCategoryCode());
+		newModel.setCategoryId(category.getId());
 		Long newId = newsDAO.save(newModel);
 		return newsDAO.finOne(newId);
 	}
@@ -35,6 +42,8 @@ public class NewService implements INewService {
 		updateNews.setCreateBy(oldNew.getCreateBy());
 		updateNews.setCreateDate(oldNew.getCreateDate());
 		updateNews.setModifiedDate(new Date(System.currentTimeMillis()));
+		CategoryModel category = categoryDAO.findOneByCode(updateNews.getCategoryCode());
+		updateNews.setId(category.getId());
 		newsDAO.update(updateNews);
 		return newsDAO.finOne(updateNews.getId());
 	}
@@ -59,7 +68,10 @@ public class NewService implements INewService {
 
     @Override
     public NewsModel findOne(Long id) {
-      return newsDAO.finOne(id);
+        NewsModel news = newsDAO.finOne(id);
+        CategoryModel category = categoryDAO.findOne(news.getCategoryId());
+        news.setCategoryCode(category.getCode());
+      return news;
     }
 
 }

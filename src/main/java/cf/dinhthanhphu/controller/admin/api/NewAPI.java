@@ -41,7 +41,7 @@ public class NewAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		NewsModel newModel = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-		newModel.setCreateBy(((UserModel)SessionUtil.getInstance().getValue(req, SystemConstant.USER)).getUserName());
+		newModel.setCreateBy(((UserModel)SessionUtil.getInstance().getValue(req, "USERMODEL")).getUserName());
 		newModel = newService.save(newModel);
 		mapper.writeValue(resp.getOutputStream(), newModel);
 	}
@@ -53,7 +53,7 @@ public class NewAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		NewsModel updateNews = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
-		updateNews.setModifiedBy(((UserModel)SessionUtil.getInstance().getValue(req, SystemConstant.USER)).getUserName());
+		updateNews.setModifiedBy(((UserModel)SessionUtil.getInstance().getValue(req, "USERMODEL")).getUserName());
 		updateNews = newService.update(updateNews);
 		mapper.writeValue(resp.getOutputStream(), updateNews);
 	}

@@ -14,6 +14,7 @@ import cf.dinhthanhphu.constant.SystemConstant;
 import cf.dinhthanhphu.model.NewsModel;
 import cf.dinhthanhphu.paging.PageRequest;
 import cf.dinhthanhphu.paging.pageble;
+import cf.dinhthanhphu.service.ICategoryService;
 import cf.dinhthanhphu.service.INewService;
 import cf.dinhthanhphu.sort.Sorter;
 import cf.dinhthanhphu.utils.FormUtil;
@@ -24,6 +25,8 @@ public class NewController extends HttpServlet {
 
 	@Inject
 	private INewService newsServive;
+	@Inject
+	private ICategoryService categoryService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,12 +43,11 @@ public class NewController extends HttpServlet {
 		
 		view = "/views/admin/new/list.jsp";
 		}else if(model.getType().equals(SystemConstant.EDIT)) {
+		    //nếu là sửa thì lấy dữ liệu, còn nếu không có id thì là thêm chỉ cần chuyển trang 
 		    if(model.getId() != null) {
 		        model = newsServive.findOne(model.getId());
-		    }else {
-		        
 		    }
-		        
+		    req.setAttribute("categories", categoryService.fillAll());    
 		    view = "/views/admin/new/edit.jsp";
 		}
 		req.setAttribute(SystemConstant.MODEL, model);

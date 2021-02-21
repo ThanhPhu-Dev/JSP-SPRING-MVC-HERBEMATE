@@ -31,15 +31,6 @@ public class HomeController extends HttpServlet {
 	//đi từ url vào trang chủ
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		Long categoryId = 1L;
-//		req.setAttribute("news", newService.findByCategoryId(categoryId));
-//		NewsModel newModel = new NewsModel();
-//		newModel.setCategoryId(1L);
-//		newModel.setTitle("Bai Viet 1");
-//		newModel.setContent("Bai Viet 1");
-//		newService.save(newModel);
-
-	    
 		String action = req.getParameter("action");
 		if (action != null && action.equals("login")) {
 		    String message = req.getParameter("message");
