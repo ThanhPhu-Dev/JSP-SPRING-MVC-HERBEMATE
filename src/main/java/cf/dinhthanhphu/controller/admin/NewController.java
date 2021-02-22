@@ -18,6 +18,7 @@ import cf.dinhthanhphu.service.ICategoryService;
 import cf.dinhthanhphu.service.INewService;
 import cf.dinhthanhphu.sort.Sorter;
 import cf.dinhthanhphu.utils.FormUtil;
+import cf.dinhthanhphu.utils.MessageUtil;
 
 @WebServlet(urlPatterns = { "/admin-new" })
 public class NewController extends HttpServlet {
@@ -41,15 +42,18 @@ public class NewController extends HttpServlet {
 		//tính tổng số trang.
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() /  model.getMaxPageItem()));
 		
+		
 		view = "/views/admin/new/list.jsp";
 		}else if(model.getType().equals(SystemConstant.EDIT)) {
 		    //nếu là sửa thì lấy dữ liệu, còn nếu không có id thì là thêm chỉ cần chuyển trang 
 		    if(model.getId() != null) {
 		        model = newsServive.findOne(model.getId());
 		    }
+		   
 		    req.setAttribute("categories", categoryService.fillAll());    
 		    view = "/views/admin/new/edit.jsp";
 		}
+		MessageUtil.showMessage(req);
 		req.setAttribute(SystemConstant.MODEL, model);
 		RequestDispatcher rd = req.getRequestDispatcher(view);
         rd.forward(req, resp);

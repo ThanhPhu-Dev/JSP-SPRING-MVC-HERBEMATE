@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.ManagedBean;
 
+import org.apache.commons.lang.StringUtils;
+
 import cf.dinhthanhphu.dao.INewDAO;
 import cf.dinhthanhphu.mapper.NewMapper;
 import cf.dinhthanhphu.model.NewsModel;
@@ -53,11 +55,12 @@ public class NewDao extends AbstractDAO<NewsModel> implements INewDAO{
 		Update(sql,id);
 	}
 
+	//StringUtils.isNotBlank là hàm (từ thư viện Commons lang) check null và empty("")
 	@Override
 	public List<NewsModel> findAll(pageble pageble) {
 //		String sql = "SELECT *  FROM news  ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 		StringBuilder sql = new StringBuilder("SELECT * FROM news");
-		if(pageble.getSorter() != null)
+		if(pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName())  && StringUtils.isNotBlank(pageble.getSorter().getSortBy()))
 		{
 			sql.append(" ORDER BY " +pageble.getSorter().getSortName()+ " "+ pageble.getSorter().getSortBy());
 		}

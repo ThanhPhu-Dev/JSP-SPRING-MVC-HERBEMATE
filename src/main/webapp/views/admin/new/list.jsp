@@ -26,11 +26,11 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							<%-- <c:if test="${not empty messageResponse}">
-									<div class="alert alert-${alert}">
+							<c:if test="${not empty messageResponse}">
+									<div class="alert alert-${alter}">
   										${messageResponse}
 									</div>
-								</c:if> --%>
+								</c:if>
 							<div class="widget-box table-filter">
 								<div class="table-btn-controls">
 									<div class="pull-right tableTools-container">
@@ -64,6 +64,7 @@
 													<th scope="col">Mô Tả Ngắn</th>
 													<th scope="col">Nội Dung</th>
 													<th scope="col">Mã Danh Mục</th>
+													<th scope="col">Thao Tác</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -149,10 +150,10 @@
 					contentType: 'application/json',
 					data: JSON.stringify(data),
 					success: function(result){
-						window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1";
+						window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1&message=delete_success&alter=success";
 					},
 					error: function(error){
-						console.log(error);
+						window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1&message=error_system&alter=danger";
 					}
 				});
 			}

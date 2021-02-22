@@ -15,6 +15,7 @@ import cf.dinhthanhphu.model.UserModel;
 import cf.dinhthanhphu.service.ICategoryService;
 import cf.dinhthanhphu.service.IUserService;
 import cf.dinhthanhphu.utils.FormUtil;
+import cf.dinhthanhphu.utils.MessageUtil;
 import cf.dinhthanhphu.utils.SessionUtil;
 
 @WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap","/thoat" })
@@ -33,12 +34,7 @@ public class HomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String action = req.getParameter("action");
 		if (action != null && action.equals("login")) {
-		    String message = req.getParameter("message");
-		    String alter = req.getParameter("alter");
-		    if(message != null && alter != null) {
-		        req.setAttribute("message", resourcebundle.getString(message));
-		        req.setAttribute("alter", alter);
-		    }
+		    MessageUtil.showMessage(req);
 			RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
 			rd.forward(req, resp);
 		} else if (action != null && action.equals("logout")) {

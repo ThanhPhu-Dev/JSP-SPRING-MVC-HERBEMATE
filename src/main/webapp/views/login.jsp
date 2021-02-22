@@ -14,10 +14,10 @@
 			<!-- Tabs Titles -->
 
 			<!-- Icon -->
-			<c:if test="${not empty message}">
+			<c:if test="${not empty messageResponse}">
 				<div class="fadeIn first">
 					<div class="alert alert-${alter}">
-				    	<strong>${message}</strong> 
+				    	<strong>${messageResponse}</strong> 
 				 	</div>
 				 </div>
 			</c:if>

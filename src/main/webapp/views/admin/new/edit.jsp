@@ -24,11 +24,11 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
-                        <c:if test="${not empty messageResponse}">
-									<div class="alert alert-${alert}">
-  										${messageResponse}
-									</div>
-						</c:if>
+                	<c:if test="${not empty messageResponse}">
+                       <div class="alert alert-${alter}">
+						  ${messageResponse}
+						</div>
+					</c:if>
                         <form id="formSubmit">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right">Thể loại</label>
@@ -105,7 +105,9 @@
     </div>
 </div>
 <script>
+	var editor = '';
 $(document).ready(function(){
+	editor =CKEDITOR.replace('content');
 	  
 		$("#btnAddOrUpdateNew").click(function(e){
 			e.preventDefault();
@@ -114,6 +116,7 @@ $(document).ready(function(){
 			$.each(formData,function(i,v){
 				data[""+v.name+""] = v.value;
 			});
+			data["content"]=editor.getData();
 			console.log(data);
 			var id =$('#id').val();
 			if(id == ""){
@@ -131,10 +134,10 @@ $(document).ready(function(){
 				data: JSON.stringify(data),
 				dataType: 'json',
 				success: function(result){
-					console.log(result);
+					window.location.href = "${NewURL}?type=edit&id="+result.id+"&message=insert_success&alter=success";
 				},
 				error: function(error){
-					console.log(error);
+					window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1&message=error_system&alter=danger";
 				}
 			});
 		}
@@ -147,10 +150,10 @@ $(document).ready(function(){
 				data: JSON.stringify(data),
 				dataType: 'json',
 				success: function(result){
-					console.log(result);
+					window.location.href = "${NewURL}?type=edit&id="+result.id+"&message=update_success&alter=success";
 				},
 				error: function(error){
-					console.log(error);
+					window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1&message=error_system&alter=danger";
 				}
 			});
 		}
