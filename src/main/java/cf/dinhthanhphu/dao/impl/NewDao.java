@@ -37,10 +37,11 @@ public class NewDao extends AbstractDAO<NewsModel> implements INewDAO{
 	public void update(NewsModel updateNews) {
 		StringBuilder sql = new StringBuilder( "UPDATE  news SET title = ?, thumbnail = ?,");
 		sql.append("shortdescription = ?, content = ?, categoryid = ?,");
-		sql.append("createdby = ?,  createddate= ? WHERE id = ?");
+		sql.append("createdby = ?,  createddate= ?, modifieddate = ?, modifiedby = ? WHERE id = ?");
 		
-		Update(sql.toString(), updateNews.getTitle(),updateNews.getThumbnail(),updateNews.getShortDescription(), updateNews.getContent(), updateNews.getCategoryId(),
-				updateNews.getCreateBy(), updateNews.getCreateDate(), updateNews.getId());
+		Update(sql.toString(), updateNews.getTitle(),updateNews.getThumbnail(),updateNews.getShortDescription(), updateNews.getContent(),
+		        updateNews.getCategoryId(),updateNews.getCreateBy(), updateNews.getCreateDate(),updateNews.getModifiedDate(),
+		        updateNews.getModifiedBy(), updateNews.getId());
 		
 	}
 
@@ -61,7 +62,7 @@ public class NewDao extends AbstractDAO<NewsModel> implements INewDAO{
 			sql.append(" ORDER BY " +pageble.getSorter().getSortName()+ " "+ pageble.getSorter().getSortBy());
 		}
 		else {
-			sql.append("ORDER BY id");
+			sql.append(" ORDER BY id");
 		}
 		if(pageble.getOffset() != null && pageble.getLimit() != null)//nếu để null vào câu query thì chổ set parameter sẽ bị lổi vì k có kiệu null
 		{

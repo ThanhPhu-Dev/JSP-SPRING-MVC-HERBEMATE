@@ -35,7 +35,7 @@ public class AuthorizationFilter implements Filter{
         HttpServletResponse resp = (HttpServletResponse) response;
         String url = req.getServletPath();
 //        String url = req.getRequestURI();
-        if(url.startsWith("/BanKhoaHoc/admin")) {
+        if(url.startsWith("/admin")) {
             UserModel model = (UserModel) SessionUtil.getInstance().getValue(req, "USERMODEL");
             if(model != null) {
                  if(model.getRole().getCode().equals(SystemConstant.ADMIN)) {

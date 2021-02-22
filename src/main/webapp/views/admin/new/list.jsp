@@ -1,7 +1,7 @@
 
 <%@include file="/common/taglib.jsp"%>
-<%-- <c:url var="APIurl" value="/api-admin-new"/>
-<c:url var ="NewURL" value="/admin-new"/> --%>
+<c:url var="APIurl" value="/api-admin-new"/>
+<c:url var ="NewURL" value="/admin-new"/>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -58,7 +58,7 @@
 										<table class="table">
 											<thead>
 												<tr>
-													<th scope="col">Mã Bài Viết</th>
+													<th><input type="checkbox" id="checkAll"></th>
 													<th scope="col">Tên Bài Viết</th>
 													<th scope="col">hình Ảnh</th>
 													<th scope="col">Mô Tả Ngắn</th>
@@ -69,6 +69,7 @@
 											<tbody>
 											<c:forEach var = "item" items= "${model.listResult}">
 												<tr>
+													<td><input type="checkbox" id="checkbox_${item.id}" value="${item.id}"></td>
 													<td>${item.title}</td>
 													<td>${item.thumbnail}</td>
 													<td>${item.shortDescription}</td>
@@ -105,56 +106,58 @@
 		</form>
 	</div>
 	<!-- /.main-content -->
-	<script>
-	var totalPages = ${model.totalPage};
-	var currentPage = ${model.page};
-	/* var visiblePages = ${model.maxPageItem}; */
-	var limit = 5;
-	 $(function () {
-	        window.pagObj = $('#pagination').twbsPagination({
-	            totalPages: totalPages,
-	            visiblePages: 4,
-	            startPage: currentPage,
-	            onPageClick: function (event, page) {
-	            	if (currentPage != page){
-		                // console.info(page + ' (from options)');
-		                $('#maxPageItem').val(limit);
-		                $('#page').val(page);
-		                $('#sortName').val('title');
-		                $('#sortBy').val('desc');
-		                $('#type').val('list');
-		                $('#formSubmit').submit();
-	            	}
-	            }
-	        });
-	    });
-		
+<script>
+	$(document).ready(function(){
+		var totalPages = ${model.totalPage};
+		var currentPage = ${model.page};
+		/* var visiblePages = ${model.maxPageItem}; */
+		var limit = 5;
+		 $( document ).ready(function () {
+		        window.pagObj = $('#pagination').twbsPagination({
+		            totalPages: totalPages,
+		            visiblePages: 4,
+		            startPage: currentPage,
+		            onPageClick: function (event, page) {
+		            	if (currentPage != page){
+			                // console.info(page + ' (from options)');
+			                $('#maxPageItem').val(limit);
+			                $('#page').val(page);
+			                $('#sortName').val('title');
+			                $('#sortBy').val('desc');
+			                $('#type').val('list');
+			                $('#formSubmit').submit();
+		            	}
+		            }
+		        });
+		    });
+			
 
-		/* $("#btnDelete").click(function() {
-			var data = {};
-			var ids = $('tbody input[type=checkbox]:checked').map(function() {
-				return $(this).val();
-			}).get();
-			data['ids'] = ids;
-			deleteNew(data);
-		}); */
-
-		/* function deleteNew(data) {
-			$
-					.ajax({
-						url : '${APIurl}',
-						type : 'DELETE',
-						contentType : 'application/json',
-						data : JSON.stringify(data),
-						success : function(result) {
-							window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=delete_success";
-						},
-						error : function(error) {
-							window.location.href = "${NewURL}?type=list&maxPageItem=2&page=1&message=error_system";
-						}
-					});
-		} */
-	</script>
+			$("#btnDelete").click(function(){
+				var data={};
+				var ids = $('tbody input[type=checkbox]:checked').map(function(){
+					return $(this).val();
+				}).get();
+				data['ids'] = ids;
+				
+				deleteNews(data);
+			});
+			
+			function deleteNews(data){
+				$.ajax({
+					url: '${APIurl}',
+					type: 'DELETE',
+					contentType: 'application/json',
+					data: JSON.stringify(data),
+					success: function(result){
+						window.location.href = "${NewURL}?type=list&maxPageItem=5&page=1";
+					},
+					error: function(error){
+						console.log(error);
+					}
+				});
+			}
+	});
+</script>
 </body>
 
 </html>

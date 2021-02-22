@@ -43,7 +43,7 @@ public class NewService implements INewService {
 		updateNews.setCreateDate(oldNew.getCreateDate());
 		updateNews.setModifiedDate(new Date(System.currentTimeMillis()));
 		CategoryModel category = categoryDAO.findOneByCode(updateNews.getCategoryCode());
-		updateNews.setId(category.getId());
+		updateNews.setCategoryId(category.getId());
 		newsDAO.update(updateNews);
 		return newsDAO.finOne(updateNews.getId());
 	}

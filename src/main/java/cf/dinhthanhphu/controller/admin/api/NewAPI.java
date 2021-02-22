@@ -65,6 +65,7 @@ public class NewAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		NewsModel deleteNews = HttpUtil.of(req.getReader()).toModel(NewsModel.class);
+		deleteNews.setModifiedBy(((UserModel)SessionUtil.getInstance().getValue(req, "USERMODEL")).getUserName());
 		newService.delete(deleteNews.getIds());
 		mapper.writeValue(resp.getOutputStream(), "{}");
 	}

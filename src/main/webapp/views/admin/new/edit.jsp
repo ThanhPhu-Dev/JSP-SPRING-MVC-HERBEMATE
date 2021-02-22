@@ -108,13 +108,13 @@
 $(document).ready(function(){
 	  
 		$("#btnAddOrUpdateNew").click(function(e){
-			alert("The paragraph was clicked.");
 			e.preventDefault();
 			var data = {};
 			var formData = $('#formSubmit').serializeArray();
 			$.each(formData,function(i,v){
 				data[""+v.name+""] = v.value;
 			});
+			console.log(data);
 			var id =$('#id').val();
 			if(id == ""){
 				addNew(data);
@@ -139,26 +139,27 @@ $(document).ready(function(){
 			});
 		}
 		
-		
+		function updateNew(data){
+			$.ajax({
+				url: '${APIurl}',
+				type: 'PUT',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				dataType: 'json',
+				success: function(result){
+					console.log(result);
+				},
+				error: function(error){
+					console.log(error);
+				}
+			});
+		}
 	
 	
 	});
 	
 	
-/* function updateNew(data){
-	url: '${APIurl}',
-	type: 'PUT',
-	contentType: 'application/json',
-	data: JSON.stringify(data),
-	dataType: 'json',
-	success: function(result){
-		console.log(result);
-	},
-	error: function(error){
-		console.log(error);
-	}
-} */
-	
+
 	 
 </script>
 </body>

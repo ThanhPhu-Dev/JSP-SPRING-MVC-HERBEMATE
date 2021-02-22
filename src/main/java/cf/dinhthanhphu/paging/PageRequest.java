@@ -38,7 +38,7 @@ public class PageRequest implements pageble{
 	}
 	@Override
 	public Sorter getSorter() {
-		if(sort != null) {
+		if(sort.getSortName() != null) {
 			return sort;
 		}
 	return null;
