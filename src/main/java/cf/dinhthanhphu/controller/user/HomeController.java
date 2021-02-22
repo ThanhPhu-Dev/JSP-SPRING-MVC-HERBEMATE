@@ -1,7 +1,6 @@
 package cf.dinhthanhphu.controller.user;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +20,6 @@ import cf.dinhthanhphu.utils.SessionUtil;
 @WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap","/thoat" })
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ResourceBundle resourcebundle = ResourceBundle.getBundle("message");
 
 	@Inject
 	private ICategoryService categoryService;
