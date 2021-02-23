@@ -1,3 +1,3 @@
 # JSPServlet-MVC-JDBC
-học JSP servlet - mô hình 3 lớp + MVC - JDBC
+Maven project - JSP servlet - three layer + MVC - JDBC type tuple - restful API - CKEDITOR - Rule SOLID - servlet weld 
 
