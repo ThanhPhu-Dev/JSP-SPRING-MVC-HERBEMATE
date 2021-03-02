@@ -93,12 +93,14 @@
 		</dependency>
 		<!--end json -->
 
+		<!--mapping tu parameter sang object -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
 		</dependency>
 
+	<!--khong biet la gi lun -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
@@ -111,6 +113,7 @@
 			<version>${beanUtils.version}</version>
 		</dependency>
 		
+		<!--giup kiem tra object null hay empty -->
 		<dependency>
 		    <groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>
